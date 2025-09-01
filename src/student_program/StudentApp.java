@@ -1,3 +1,5 @@
+package student_program;
+
 public class StudentApp {
     public static void main(String[] args) {
         StudentInput studentInput = new StudentInput();

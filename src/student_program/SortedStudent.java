@@ -1,3 +1,5 @@
+package student_program;
+
 import java.io.*;
 import java.util.*;
 

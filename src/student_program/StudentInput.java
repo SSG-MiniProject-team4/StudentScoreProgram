@@ -1,3 +1,5 @@
+package student_program;
+
 import java.io.*;
 import java.util.HashMap;
 import java.util.Map;
@@ -64,7 +66,7 @@ public class StudentInput {
                     else if(student.getAverage() >= 80) student.setGrade("B");
                     else if(student.getAverage() >= 70) student.setGrade("C");
                     else if(student.getAverage() >= 60) student.setGrade("D");
-                    else if(student.getAverage() < 60) student.setGrade("F");
+                    else student.setGrade("F");
 
                     studentInfo.put(student.getName(), student);
                     System.out.printf("=> 저장됨: %s (총점=%d, 평균=%.1f, 학점=%s) \n",
