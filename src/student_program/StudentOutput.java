@@ -1,6 +1,11 @@
 package student_program;
 
+import student_program.common.ErrorCode;
+import student_program.common.StudentText;
+
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -8,6 +13,7 @@ import java.util.Map;
 import java.util.List;
 
 public class StudentOutput {
+    private String fileName = "C:/Temp/student.dat";
     private Map<String, Student> studentInfo;
     private List<Student> datas = new ArrayList<>();
     private String[] names;
@@ -15,15 +21,19 @@ public class StudentOutput {
     class InnerClass{
         private void loadObjectFromFile(){
             try(ObjectInputStream ois = new ObjectInputStream(
-                    new FileInputStream("C:/Temp/student.dat"))){
+                    new FileInputStream(fileName))){
                 Object obj = ois.readObject();
                 if(obj instanceof HashMap) {
                     studentInfo = (HashMap<String, Student>) obj;
                 } else {
-                    System.out.println("타입 오류 발생");
+                    System.out.println(ErrorCode.FILE_ERROR.getText());
                 }
-            } catch (Exception e){
-                System.out.println(e.getMessage());
+            } catch (FileNotFoundException e){
+                System.out.println(ErrorCode.FILE_ERROR.getText());
+            } catch (IOException e) {
+                System.out.println(ErrorCode.OUTPUT_ERROR.getText());
+            }catch (Exception e){
+                System.out.println(ErrorCode.ERROR.getText());
             }
         }
 
@@ -32,29 +42,38 @@ public class StudentOutput {
             names = new String[studentInfo.size()];
             int index = 0;
 
-            try {
-                while(true){
-                    Student student = keys.stream()
-                            .map(key -> studentInfo.get(key))
-                            .max(Comparator.comparingDouble(Student::getAverage)).get();
-                    datas.add(student);
-                    names[index++] = student.getName();
-                    studentInfo.remove(student.getName());
-                }
-            } catch (Exception e) {
-                throw new RuntimeException(e);
+            while (!keys.isEmpty()) {
+                Student student = keys.stream()
+                        .map(key -> studentInfo.get(key))
+                        .max(Comparator.comparingDouble(Student::getAverage)).get();
+                datas.add(student);
+                names[index++] = student.getName();
+                keys.remove(student.getName());
             }
-
         }
 
+
         private void printInfo(){
-            System.out.println("[평균 오름차순 성적표]");
+            System.out.println(StudentText.ASC_SCORE.getText());
+
+//            for (int j = 0; j < datas.size(); j++) {
+//                Student student = datas.get(i);
+//                System.out.println((i+1) + StudentText.R_PAR.getText() + student.getName());
+//                System.out.println(StudentText.SCORE.getText() + student.getRecord().toString());
+//                System.out.println(StudentText.TOTAL.getText() + student.getTotal() +
+//                        StudentText.AVG.getText() + student.getAverage() +
+//                        StudentText.GRADE.getText() + student.getGrade());
+//            }
+
             AtomicInteger i = new AtomicInteger(1);
             Arrays.stream(names).forEach(name ->{
                 Student student = studentInfo.get(name);
-                System.out.println((i.getAndIncrement()) + ") " + name);
-                System.out.println("점수: " + student.getRecord().toString());
-                System.out.println("총점: " + student.getTotal() + ", 평균: " + student.getAverage() + ", 학점: " + student.getGrade());
+                System.out.println((i.getAndIncrement()) + StudentText.R_PAR.getText() + name);
+                System.out.println(StudentText.SCORE.getText() + student.getRecord().toString());
+                System.out.println(StudentText.TOTAL.getText() + student.getTotal() +
+                        StudentText.AVG.getText() + student.getAverage() +
+                        StudentText.GRADE.getText() + student.getGrade());
+                System.out.println();
             });
         }
     }
@@ -62,7 +81,12 @@ public class StudentOutput {
     public void run(){
         InnerClass innerClass = new InnerClass();
         innerClass.loadObjectFromFile();
-        innerClass.rearrangeData();
-        innerClass.printInfo();
+        if (studentInfo != null) {
+            innerClass.rearrangeData();
+            innerClass.printInfo();
+        } else {
+            System.out.println(ErrorCode.FILE_INPUT_ERROR.getText());
+        }
+
     }
 }

@@ -3,6 +3,7 @@ package student_program;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import student_program.common.StudentText;
 
 
 import java.io.Serializable;
@@ -27,8 +28,8 @@ public class Student implements Serializable{
 
     @Override
     public String toString() {
-        return name + " (총점=" + total +
-                ", 평균=" + String.format("%.1f", average) +
-                ", 학점='" + grade + ")";
+        return name + StudentText.L_PAR.getText() + StudentText.TOTAL.getText() + total +
+                StudentText.AVG.getText() + String.format("%.1f", average) +
+                StudentText.GRADE.getText() + grade + ")";
     }
 }
