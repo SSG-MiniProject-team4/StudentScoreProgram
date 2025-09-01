@@ -1,7 +1,7 @@
-package common;
+package StudentScoreProgram.common;
 
-import TeamMission1.Student;
-import TeamMission1.exception.StudentException;
+import StudentScoreProgram.Student;
+import StudentScoreProgram.exception.StudentException;
 
 import java.util.HashMap;
 

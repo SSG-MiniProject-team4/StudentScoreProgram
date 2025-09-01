@@ -1,7 +1,9 @@
-import TeamMission1.common.ErrorCode;
-import TeamMission1.common.StudentText;
-import TeamMission1.common.ValidCheck;
-import TeamMission1.exception.StudentException;
+package StudentScoreProgram;
+
+import StudentScoreProgram.common.ErrorCode;
+import StudentScoreProgram.common.StudentText;
+import StudentScoreProgram.common.ValidCheck;
+import StudentScoreProgram.exception.StudentException;
 
 import java.io.*;
 import java.util.ArrayList;

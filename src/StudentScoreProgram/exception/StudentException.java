@@ -1,6 +1,6 @@
-package exception;
+package StudentScoreProgram.exception;
 
-import TeamMission1.common.ErrorCode;
+import StudentScoreProgram.common.ErrorCode;
 
 public class StudentException extends RuntimeException {
     private final ErrorCode error;

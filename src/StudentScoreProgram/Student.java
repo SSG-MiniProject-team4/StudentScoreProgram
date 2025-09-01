@@ -1,4 +1,6 @@
-import TeamMission1.common.StudentText;
+package StudentScoreProgram;
+
+import StudentScoreProgram.common.StudentText;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

@@ -1,4 +1,4 @@
-package common;
+package StudentScoreProgram.common;
 
 import lombok.Getter;
 

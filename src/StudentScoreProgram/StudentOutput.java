@@ -1,5 +1,7 @@
-import TeamMission1.common.ErrorCode;
-import TeamMission1.common.StudentText;
+package StudentScoreProgram;
+
+import StudentScoreProgram.common.ErrorCode;
+import StudentScoreProgram.common.StudentText;
 
 import java.io.*;
 import java.util.*;
