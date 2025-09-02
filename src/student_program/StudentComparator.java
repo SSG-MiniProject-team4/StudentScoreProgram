@@ -7,7 +7,8 @@ public class StudentComparator implements Comparator<Student>, Serializable {
 
     @Override
     public int compare(Student o1, Student o2) {
-        int cmp = Double.compare(o2.getAverage(), o1.getAverage());
-        return (cmp != 0) ? cmp : o1.getName().compareTo(o2.getName());
+        //o1이 클 때 양수
+        int cmp = Double.compare(o1.getAverage(), o2.getAverage()); //오름차순 정렬
+        return (cmp != 0) ? cmp : o1.getName().compareTo(o2.getName()); //두 값이 같은 경우 이름 기준 정렬
     }
 }

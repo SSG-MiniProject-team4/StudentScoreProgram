@@ -16,13 +16,16 @@ import java.util.List;
 public class Student implements Serializable{
     private static final long serialVersionUID = 1L;
     private String name;
-    private List<Integer> record;
     private int total;
-    private float average;
+    private double average;
     private String grade;
+    private List<Integer> record;
 
     public Student(String name){
         this.name = name;
+        total = 0;
+        average = 0.0;
+        grade = "";
         record = new ArrayList<>();
     }
 

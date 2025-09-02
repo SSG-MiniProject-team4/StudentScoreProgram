@@ -24,6 +24,7 @@ public class SortedStudent {
                 }
             } catch (FileNotFoundException e){
                 System.out.println(ErrorCode.FILE_ERROR.getText());
+                System.exit(0);
             } catch (IOException e) {
                 System.out.println(ErrorCode.INPUT_ERROR.getText());
             }catch (Exception e){
@@ -34,6 +35,7 @@ public class SortedStudent {
         private void createTreeeSet() {
             //람다식으로 구현했으나 저장에 오류가 발생해서 comparator 클래스를 명시적으로 분리
             sortedStudents = new TreeSet<Student>(new StudentComparator());
+            //람다식으로 treeset에 student 객체 add
             studentInfo.entrySet().stream().map(Map.Entry::getValue).forEach(sortedStudents::add);
         }
 
@@ -57,9 +59,10 @@ public class SortedStudent {
                 System.out.println(StudentText.RESULT_MSG.getText());
             } catch (FileNotFoundException e){
                 System.out.println(ErrorCode.FILE_ERROR.getText());
+                System.exit(0);
             } catch (IOException e) {
                 System.out.println(ErrorCode.OUTPUT_ERROR.getText());
-                e.printStackTrace();
+                //e.printStackTrace();
             }catch (Exception e){
                 System.out.println(ErrorCode.ERROR.getText());
             }

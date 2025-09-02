@@ -13,7 +13,7 @@ import java.util.Map;
 import java.util.List;
 
 public class StudentOutput {
-    private String fileName = "C:/Temp/student.dat";
+    private static final String fileName = "C:/Temp/student.dat";
     private Map<String, Student> studentInfo;
     private List<Student> datas = new ArrayList<>();
     private String[] names;
@@ -42,6 +42,13 @@ public class StudentOutput {
             names = new String[studentInfo.size()];
             int index = 0;
 
+            /*
+            더 간단한 방식도 있지만 정렬 알고리즘 요구조건을 맞추기 위해서 이렇게 함
+
+            정렬 알고리즘(보이는 범위)
+            - 해시맵에서 키를 꺼내 가장 높은 평균(highest AVG) 학생을 찾아
+            `datas`에 추가하고 키 제거하는 선택
+            */
             while (!keys.isEmpty()) {
                 Student student = keys.stream()
                         .map(key -> studentInfo.get(key))
@@ -55,15 +62,6 @@ public class StudentOutput {
 
         private void printInfo(){
             System.out.println(StudentText.ASC_SCORE.getText());
-
-//            for (int j = 0; j < datas.size(); j++) {
-//                Student student = datas.get(i);
-//                System.out.println((i+1) + StudentText.R_PAR.getText() + student.getName());
-//                System.out.println(StudentText.SCORE.getText() + student.getRecord().toString());
-//                System.out.println(StudentText.TOTAL.getText() + student.getTotal() +
-//                        StudentText.AVG.getText() + student.getAverage() +
-//                        StudentText.GRADE.getText() + student.getGrade());
-//            }
 
             AtomicInteger i = new AtomicInteger(1);
             Arrays.stream(names).forEach(name ->{

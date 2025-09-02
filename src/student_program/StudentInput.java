@@ -37,7 +37,7 @@ public class StudentInput {
                 while (true){
                     System.out.print(StudentText.NAME.getText());
                     String name = br.readLine();
-                    if(name.equals(StudentText.EXIT_MSG.getText())) {exit(); break;}
+                    if(name.equalsIgnoreCase(StudentText.EXIT.getText())) {exit(); break;}
                     Student student = new Student(name);
 
                     System.out.print(StudentText.KOR.getText());
@@ -66,8 +66,7 @@ public class StudentInput {
         }
 
         private void checkKeyAndInputData(Student student) {
-            if(studentInfo.entrySet().stream()
-                    .anyMatch(s -> s.getKey().equals(student.getName()))){
+            if(studentInfo.containsKey(student.getName())) {
                 System.out.println(StudentText.NAME_EXIST.getText());
             } else {
                 if(student.getRecord().stream()
