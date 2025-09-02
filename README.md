@@ -16,7 +16,7 @@
 - 모든 학생 정보는 `C:/Temp/student.dat` 파일에 **객체 직렬화 방식**으로 저장됩니다.
 
 ### 📈 데이터 정렬 및 조회
-- `student.dat` 파일의 데이터를 불러와 **평균 점수 내림차순**으로 정렬하여 콘솔에 출력합니다.
+- `student.dat` 파일의 데이터를 불러와 **평균 점수 오름차순**으로 정렬하여 콘솔에 출력합니다.
 - 평균 점수가 같을 경우, **이름 오름차순**으로 정렬됩니다.
 
 ### 💾 정렬된 데이터 파일 저장
@@ -26,14 +26,14 @@
 
 ## 📂 클래스 구성 및 역할
 
-| 파일명                    | 역할 및 상세 설명 |
-|---------------------------|------------------|
-| `StudentApp.java`         | 프로그램 실행의 시작점. `StudentInput`, `StudentOutput`, `SortedStudent` 클래스를 순차적으로 호출하여 전체 흐름 제어 |
-| `StudentInput.java`       | 사용자 입력 및 초기 저장 담당. `BufferedReader`로 콘솔 입력 처리, 유효성 검사 후 `HashMap`에 저장. `student.dat`에 직렬화 |
-| `StudentOutput.java`      | 데이터 조회 및 콘솔 출력 담당. `ObjectInputStream`으로 `student.dat` 읽고, `Arrays.stream()`으로 정렬 후 출력 |
-| `SortedStudent.java`      | 데이터 정렬 및 파일 저장 담당. `StudentComparator`를 사용하여 `TreeSet`에 정렬 저장, `orderByAvg.dat`에 직렬화 |
-| `Student.java`            | 학생 정보 모델 클래스. 이름, 점수, 총점, 평균, 학점 속성 포함. `Serializable` 구현 |
-| `StudentComparator.java`  | 정렬 기준 정의 클래스. `Comparator` 인터페이스 구현. 평균 → 이름 기준으로 비교 |
+| 파일명                    | 역할 및 상세 설명                                                                  |
+|---------------------------|-----------------------------------------------------------------------------|
+| `StudentApp.java`         | 프로그램 실행의 시작점. 클래스를 순차적으로 호출하여 전체 흐름 제어                                      |
+| `StudentInput.java`       | 사용자 입력 및 초기 저장 담당.                                                          |
+| `StudentOutput.java`      | 데이터 조회 및 콘솔 출력 담당.                                                          |
+| `SortedStudent.java`      | 데이터 정렬 및 파일 저장 담당.                                                          |
+| `Student.java`            | 학생 정보 모델 클래스. 이름, 점수, 총점, 평균, 학점 속성 포함. `Serializable` 구현                   |
+| `StudentComparator.java`  | 정렬 기준 정의 클래스.                                                               |
 | `ErrorCode.java` / `StudentText.java` | 상수 관리 열거형 클래스. 오류 메시지(`ErrorCode`)와 안내 문구(`StudentText`) 정의로 가독성 및 유지보수성 향상 |
 
 ---
@@ -54,13 +54,15 @@
 - 학생 정보를 콘솔에서 입력받고 초기 저장을 담당
 
 ### 주요 기능:
+- 파일 존재 확인 및 로드, 없을 시 빈 파일 생성
 - `BufferedReader`를 사용하여 이름과 점수(국어, 영어, 수학, 과학) 입력
 - 점수는 **0~100 사이의 정수**만 허용
 - **중복 이름 입력 불가**
 
 ### 유효성 검사 후:
 - **총점, 평균, 학점(A~F)** 계산
-- `HashMap`에 저장
+- 학생 정보 `HashMap`에 저장
+- 위 작업 반복 후 종료 조건 발생 시 종료 처리
 - `C:/Temp/student.dat`에 **객체 직렬화 방식**으로 저장
 
 ---
@@ -70,7 +72,7 @@
 
 ### 주요 기능:
 - `ObjectInputStream`으로 `student.dat` 파일 읽기
-- `Arrays.stream()`을 사용하여 **평균 점수 기준 내림차순 정렬**
+- 배열, 리스트, Set 및 `Arrays.stream()`을 사용하여 조건에 맞게 **평균 점수 기준 오름차순 정렬**
 - 보기 좋은 형식으로 콘솔 출력
 
 ---
@@ -99,7 +101,7 @@
 - 학점
 - 과목별 점수 리스트 (`record`)
 
-- `Serializable` 인터페이스 구현 → **파일 저장 및 불러오기 가능**
+- `Serializable` 인터페이스 구현 → **객체 파일 저장 및 불러오기 가능**
 
 ---
 
@@ -130,11 +132,48 @@
 ---
 ## ▶️ 실행 방법
 
-1. 모든 `.java` 파일을 **컴파일**합니다.
-2. `StudentApp.java`를 **실행**하여 프로그램을 시작합니다.
-3. 콘솔의 안내에 따라 **학생 정보를 입력**합니다.
-4. 입력 종료를 원하면 **이름에 `^^`를 입력**합니다.
-5. 입력이 완료되면 자동으로 **데이터 처리 및 파일 저장**이 진행됩니다.
+### 1. 모든 `.java` 파일을 **컴파일**합니다.
+
+<img src="./image/compile.png" alt="설명" width="1000"/>
+
+---
+
+### 2. `StudentApp.java`를 **실행**하여 프로그램을 시작합니다.
+
+<img src="./image/app.png" alt="설명" width="1000"/>
+
+---
+
+### 3. 콘솔의 안내에 따라 **학생 정보를 입력**합니다.
+### 4. 입력 종료를 원하면 **이름에 `^^`를 입력**합니다.
+
+<img src="./image/input.png" alt="설명" width="1000"/>
+
+---
+
+### 4-1. 정수 유효성 검사
+
+<img src="./image/number_error.png" alt="설명" width="300"/>
+
+---
+
+### 4-2. 중복 이름 유효성 검사
+
+<img src="./image/same_name.png" alt="설명" width="500"/>
+
+---
+
+### 5. 입력이 완료되면 자동으로 **데이터 처리 및 파일 저장**이 진행됩니다.
+
+- output 결과
+
+<img src="./image/asc_output.png" alt="설명" width="300"/>
+
+---
+
+- sort 결과
+
+<img src="./image/sort_print.png" alt="설명" width="400"/>
 
 ---
 
@@ -143,14 +182,7 @@
 - 원본 데이터: `C:/Temp/student.dat`
 - 정렬된 데이터: `C:/Temp/orderByAvg.dat`
 
+<img src="./image/file.png" alt="설명" width="400"/>
+
 ---
-
-[//]: # (## 💡 향후 개선 아이디어)
-
-[//]: # ()
-[//]: # (- GUI 버전으로 확장)
-
-[//]: # (- CSV 또는 Excel 파일로 내보내기 기능 추가)
-
-[//]: # (- 웹 기반 성적 관리 시스템으로 확장)
 

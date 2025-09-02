@@ -22,7 +22,7 @@ public class StudentInput {
 
             file = new File(fileName); // 파일 로드
             if (!file.exists()) {
-                saveData(); // 파일이 없으면 빈 Map 저장
+                saveData(); // 파일이 없으면 빈 파일 생성
             }
         }
 

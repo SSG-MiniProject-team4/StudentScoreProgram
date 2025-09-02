@@ -33,6 +33,7 @@ public class SortedStudent {
         }
 
         private void createTreeeSet() {
+            //tree set 생성
             //람다식으로 구현했으나 저장에 오류가 발생해서 comparator 클래스를 명시적으로 분리
             sortedStudents = new TreeSet<Student>(new StudentComparator());
             //학생 객체 treeset에 저장
