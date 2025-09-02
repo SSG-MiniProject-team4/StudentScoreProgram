@@ -23,9 +23,6 @@ public class Student implements Serializable{
 
     public Student(String name){
         this.name = name;
-        total = 0;
-        average = 0.0;
-        grade = "";
         record = new ArrayList<>();
     }
 

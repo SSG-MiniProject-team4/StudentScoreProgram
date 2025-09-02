@@ -35,8 +35,9 @@ public class SortedStudent {
         private void createTreeeSet() {
             //람다식으로 구현했으나 저장에 오류가 발생해서 comparator 클래스를 명시적으로 분리
             sortedStudents = new TreeSet<Student>(new StudentComparator());
-            //람다식으로 treeset에 student 객체 add
-            studentInfo.entrySet().stream().map(Map.Entry::getValue).forEach(sortedStudents::add);
+            //학생 객체 treeset에 저장
+            sortedStudents.addAll(studentInfo.values());
+
         }
 
         private void printResult() {
@@ -76,5 +77,4 @@ public class SortedStudent {
         innerClass.printResult();
         innerClass.outputObject();
     }
-
 }

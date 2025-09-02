@@ -40,7 +40,7 @@ public class StudentOutput {
         private void rearrangeData(){
             Set<String> keys = new HashSet<>(studentInfo.keySet());
             names = new String[studentInfo.size()];
-            int index = 0;
+            int index = studentInfo.size();
 
             /*
             더 간단한 방식도 있지만 정렬 알고리즘 요구조건을 맞추기 위해서 이렇게 함
@@ -54,7 +54,7 @@ public class StudentOutput {
                         .map(key -> studentInfo.get(key))
                         .max(Comparator.comparingDouble(Student::getAverage)).get();
                 datas.add(student);
-                names[index++] = student.getName();
+                names[--index] = student.getName();
                 keys.remove(student.getName());
             }
         }
