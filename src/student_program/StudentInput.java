@@ -19,10 +19,27 @@ public class StudentInput {
             if (!dir.exists()) { //디렉토리 없으면
                 dir.mkdir(); // 디렉토리만 생성
             }
-
             file = new File(fileName); // 파일 로드
-            if (!file.exists()) {
-                saveData(); // 파일이 없으면 빈 파일 생성
+
+            if (file.exists()) { //파일 존재 시 객체 불러오기
+                try(ObjectInputStream ois = new ObjectInputStream(
+                        new FileInputStream(file))){
+                    Object obj = ois.readObject();
+                    if(obj instanceof HashMap) {
+                        studentInfo = (HashMap<String, Student>) obj;
+                    } else {
+                        System.out.println(ErrorCode.FILE_ERROR.getText());
+                    }
+                } catch (FileNotFoundException e){
+                    System.out.println(ErrorCode.FILE_ERROR.getText());
+                } catch (IOException e) {
+                    System.out.println(ErrorCode.OUTPUT_ERROR.getText());
+                }catch (Exception e){
+                    System.out.println(ErrorCode.ERROR.getText());
+                }
+            } else { //파일 없으면
+                saveData(); // 빈 파일 생성
+                studentInfo = new HashMap<>(); // 새 맵 생성
             }
         }
 
