@@ -54,6 +54,8 @@ public class StudentOutput {
             정렬 알고리즘(보이는 범위)
             - 해시맵에서 키를 꺼내 가장 높은 평균(highest AVG) 학생을 찾아
             `datas`에 추가하고 키 제거하는 선택
+            - names 배열 정렬된 이름 저장하는 데 사용
+            - 키 값을 저장한 set 임시로 사용
             */
             while (!keys.isEmpty()) {
                 //set 하나를 만들어 키 저장 후 하나씩 추출해 맵에서 가장 평균이 큰 값을 구함

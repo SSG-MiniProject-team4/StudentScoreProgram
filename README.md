@@ -81,13 +81,12 @@
 - 학생 데이터를 정렬 후 별도 파일로 저장
 
 ### 주요 기능:
-- `StudentComparator`를 사용하여 `TreeSet`에 학생 객체 추가
+- 정렬 기준을 정의한 `StudentComparator`를 사용하여 `TreeSet`에 학생 객체 추가
+- 정렬된 데이터는 `C:/Temp/orderByAvg.dat`에 **객체 직렬화 방식**으로 저장
 
 ### 정렬 기준:
 - **평균 오름차순**
 - 평균이 같을 경우 **이름 오름차순**
-
-- 정렬된 데이터는 `C:/Temp/orderByAvg.dat`에 **객체 직렬화 방식**으로 저장
 
 ---
 
