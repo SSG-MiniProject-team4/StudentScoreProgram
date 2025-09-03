@@ -49,6 +49,7 @@ public class StudentInput {
             System.out.println(StudentText.VALID_SCORE.getText());
         }
 
+        //학생 정보 입력 메서드
         private void inputInfo() {
             try (BufferedReader br = new BufferedReader(new InputStreamReader(System.in))){
                 while (true){
@@ -78,17 +79,20 @@ public class StudentInput {
             }
         }
 
+        //종료 조건 입력 시 종료 메세지 출력 메서드
         private void exit(){
             System.out.println(StudentText.EXIT.getText());
             System.out.println(StudentText.INPUT_END.getText());
             System.out.println("[완료] " + studentInfo.size() + "명의 정보가 " + fileName + " 에 저장되었습니다.");
         }
 
+        //유효성 검사 메섣,
         private void checkKeyAndInputData(Student student) {
             if(studentInfo.containsKey(student.getName())) {
                 System.out.println(StudentText.NAME_EXIST.getText());
             } else {
                 if(student.getRecord().stream().allMatch(s -> s >= 0 && s <= 100)) {
+                    // 조건에 맞게 입력시 총점, 평균, 학점 계산 메서드 실행
                     calculateScores(student);
 
                     studentInfo.put(student.getName(), student);
@@ -100,6 +104,7 @@ public class StudentInput {
             }
         }
 
+        // 계산 메서드
         private void calculateScores(Student student) {
             //총점 계산
             student.setTotal(student.getRecord().stream().mapToInt(s -> Integer.valueOf(s)).sum());
@@ -114,6 +119,7 @@ public class StudentInput {
             else student.setGrade(StudentText.F.getText());
         }
 
+        //저장 메서드
         private void saveData(){
             try(ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(file))){
                 oos.writeObject(studentInfo);

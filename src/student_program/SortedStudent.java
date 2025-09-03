@@ -13,6 +13,8 @@ public class SortedStudent {
     private Set<Student> sortedStudents = null;
 
     class InnerClass {
+
+        //파일 불러오기
         private void loadObjectFromFile() {
             try (ObjectInputStream ois = new ObjectInputStream(
                     new FileInputStream(fileName))) {
@@ -38,9 +40,9 @@ public class SortedStudent {
             sortedStudents = new TreeSet<Student>(new StudentComparator());
             //학생 객체 treeset에 저장
             sortedStudents.addAll(studentInfo.values());
-
         }
 
+        //미리보기 10개 출력
         private void printResult() {
             System.out.println(StudentText.SORT_MSG.getText());
             System.out.println(StudentText.STUDENT_NUM.getText() + studentInfo.size());
@@ -54,6 +56,7 @@ public class SortedStudent {
             System.out.println();
         }
 
+        //파일 저장
         private void outputObject(){
             try(ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(SortFileName))){
                 oos.writeObject(sortedStudents);

@@ -37,11 +37,8 @@ public class StudentOutput {
             }
         }
 
+        // 정렬 메서드
         private void rearrangeData(){
-            Set<String> keys = new HashSet<>(studentInfo.keySet());
-            names = new String[studentInfo.size()];
-            int index = studentInfo.size();
-
             /*
             더 간단한 방식도 있지만 정렬 알고리즘 요구조건을 맞추기 위해서 이렇게 함
 
@@ -57,6 +54,10 @@ public class StudentOutput {
             - names 배열 정렬된 이름 저장하는 데 사용
             - 키 값을 저장한 set 임시로 사용
             */
+            Set<String> keys = new HashSet<>(studentInfo.keySet());
+            names = new String[studentInfo.size()];
+            int index = studentInfo.size();
+
             while (!keys.isEmpty()) {
                 //set 하나를 만들어 키 저장 후 하나씩 추출해 맵에서 가장 평균이 큰 값을 구함
                 Student student = keys.stream()
@@ -71,7 +72,7 @@ public class StudentOutput {
             }
         }
 
-
+        //출력 메서드
         private void printInfo(){
             System.out.println(StudentText.ASC_SCORE.getText());
 
